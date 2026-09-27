@@ -5,18 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>구미 호반써밋 분양전환 안내</title>
 <style>
+  /* 호반써밋 공식 브랜드 컬러 (SUMMIT 팔레트)
+     - ink   : SUMMIT Black  #101820 (구조/본문 - 탭, 헤딩, 버튼)
+     - coral : SUMMIT Coral  #B46A55 (포인트 - HOBAN 배지, 강조 텍스트)
+     - gray  : SUMMIT Gray/Dark Gray (보조/muted 텍스트) */
   :root{
-    --navy:#334464;
-    --navy-dark:#26344d;
-    --navy-soft:#eef1f6;
-    --line:#e3e6ec;
-    --text:#26313f;
-    --muted:#6b7480;
+    --ink:#101820;
+    --ink-soft:#4C4B48;
+    --coral:#B46A55;
+    --line:#e6e4e2;
+    --text:#101820;
+    --muted:#707372;
+    --soft-bg:#f5f4f3;
   }
   *{box-sizing:border-box;}
   body{
     margin:0;
-    font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;
+    font-family:"Microsoft 고딕Neo","Malgun Gothic","Apple SD Gothic Neo",sans-serif;
     background:#f4f5f7;
     color:var(--text);
   }
@@ -37,7 +42,7 @@
   }
   .badge{
     display:inline-block;
-    background:var(--navy);
+    background:var(--coral);
     color:#fff;
     font-weight:700;
     font-size:13px;
@@ -70,8 +75,8 @@
     cursor:pointer;
   }
   .tab-btn.active{
-    color:var(--navy);
-    border-bottom-color:var(--navy);
+    color:var(--ink);
+    border-bottom-color:var(--ink);
   }
   /* 방문예약 / 예약조회·취소 탭은 이번 분양전환 라운드에서 숨김 처리.
      추후 사용 시 아래 두 조건을 바꾸면 됩니다:
@@ -82,7 +87,7 @@
   }
   .eyebrow{
     text-align:center;
-    color:var(--navy);
+    color:var(--coral);
     font-size:13px;
     font-weight:700;
     letter-spacing:.3px;
@@ -96,7 +101,7 @@
   p.lead{
     line-height:1.7;
     color:var(--text);
-    background:var(--navy-soft);
+    background:var(--soft-bg);
     border-radius:8px;
     padding:16px 18px;
     margin:0 0 26px;
@@ -104,7 +109,7 @@
   }
   h3.section{
     font-size:15.5px;
-    color:var(--navy);
+    color:var(--ink);
     margin:30px 0 10px;
     display:flex;
     align-items:center;
@@ -115,7 +120,7 @@
     align-items:center;
     justify-content:center;
     width:20px;height:20px;
-    background:var(--navy);
+    background:var(--ink);
     color:#fff;
     border-radius:50%;
     font-size:12px;
@@ -137,8 +142,8 @@
   table.info tr:last-child th, table.info tr:last-child td{border-bottom:none;}
   table.info th{
     width:130px;
-    background:#f7f8fa;
-    color:var(--navy-dark);
+    background:#f6f5f4;
+    color:var(--ink);
     font-weight:700;
     white-space:nowrap;
   }
@@ -152,17 +157,17 @@
   .flow-step{
     flex:1;
     min-width:150px;
-    background:#f7f8fa;
+    background:#f6f5f4;
     border:1px solid var(--line);
     border-radius:8px;
     padding:14px 12px;
     text-align:center;
   }
-  .flow-step .t{font-weight:700;color:var(--navy-dark);font-size:13.5px;margin-bottom:6px;}
+  .flow-step .t{font-weight:700;color:var(--ink);font-size:13.5px;margin-bottom:6px;}
   .flow-step .d{font-size:12.5px;color:var(--muted);line-height:1.5;}
   .flow-arrow{
     align-self:center;
-    color:var(--navy);
+    color:var(--coral);
     font-size:18px;
     padding:0 2px;
   }
@@ -170,7 +175,7 @@
     display:block;
     width:100%;
     margin-top:30px;
-    background:var(--navy);
+    background:var(--ink);
     color:#fff;
     text-align:center;
     padding:15px;
@@ -181,7 +186,7 @@
     cursor:pointer;
     text-decoration:none;
   }
-  .cta:hover{background:var(--navy-dark);}
+  .cta:hover{background:var(--ink-soft);}
   .footnote{
     margin-top:18px;
     font-size:12.5px;
@@ -208,7 +213,7 @@
     display:block;
     font-size:13px;
     font-weight:700;
-    color:var(--navy-dark);
+    color:var(--ink);
     margin-bottom:6px;
   }
   .field select, .field input{
@@ -221,11 +226,11 @@
   }
   .field select:focus, .field input:focus{
     outline:none;
-    border-color:var(--navy);
+    border-color:var(--ink);
   }
   .lookup-btn{
     margin-top:4px;
-    background:var(--navy);
+    background:var(--ink);
     color:#fff;
     border:none;
     padding:13px;
@@ -235,7 +240,7 @@
     cursor:pointer;
     width:100%;
   }
-  .lookup-btn:hover{background:var(--navy-dark);}
+  .lookup-btn:hover{background:var(--ink-soft);}
   .result{
     margin-top:22px;
     border:1px solid var(--line);
@@ -249,7 +254,7 @@
   .result .amount{
     font-size:24px;
     font-weight:800;
-    color:var(--navy);
+    color:var(--coral);
     margin:4px 0 10px;
   }
   .result table{width:100%;border-collapse:collapse;font-size:13.5px;}
