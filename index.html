@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>구미 호반써밋 분양전환 안내</title>
+<style>
+  :root{
+    --navy:#334464;
+    --navy-dark:#26344d;
+    --navy-soft:#eef1f6;
+    --line:#e3e6ec;
+    --text:#26313f;
+    --muted:#6b7480;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Malgun Gothic","Apple SD Gothic Neo",sans-serif;
+    background:#f4f5f7;
+    color:var(--text);
+  }
+  .wrap{
+    max-width:960px;
+    margin:32px auto;
+    padding:0 16px 60px;
+  }
+  .card{
+    background:#fff;
+    border-radius:10px;
+    box-shadow:0 2px 10px rgba(0,0,0,.06);
+    overflow:hidden;
+  }
+  .header{
+    padding:28px 32px 20px;
+    border-bottom:1px solid var(--line);
+  }
+  .badge{
+    display:inline-block;
+    background:var(--navy);
+    color:#fff;
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:.5px;
+    padding:5px 12px;
+    border-radius:5px;
+    margin-bottom:12px;
+  }
+  .header h1{
+    margin:0;
+    font-size:22px;
+    font-weight:700;
+    color:var(--text);
+  }
+  .tabs{
+    display:flex;
+    border-bottom:1px solid var(--line);
+    background:#fff;
+  }
+  .tab-btn{
+    flex:1;
+    text-align:center;
+    padding:16px 8px;
+    font-size:15px;
+    font-weight:600;
+    color:var(--muted);
+    background:none;
+    border:none;
+    border-bottom:3px solid transparent;
+    cursor:pointer;
+  }
+  .tab-btn.active{
+    color:var(--navy);
+    border-bottom-color:var(--navy);
+  }
+  /* 방문예약 / 예약조회·취소 탭은 이번 분양전환 라운드에서 숨김 처리.
+     추후 사용 시 아래 두 조건을 바꾸면 됩니다:
+     1) TABS 배열에서 해당 항목의 visible: true 로 변경
+     2) 해당 tab-panel 의 hidden 속성을 JS 로직에 맞게 노출 */
+  .content{
+    padding:36px 32px 44px;
+  }
+  .eyebrow{
+    text-align:center;
+    color:var(--navy);
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.3px;
+    margin-bottom:6px;
+  }
+  .content h2{
+    text-align:center;
+    font-size:26px;
+    margin:0 0 26px;
+  }
+  p.lead{
+    line-height:1.7;
+    color:var(--text);
+    background:var(--navy-soft);
+    border-radius:8px;
+    padding:16px 18px;
+    margin:0 0 26px;
+    font-size:14.5px;
+  }
+  h3.section{
+    font-size:15.5px;
+    color:var(--navy);
+    margin:30px 0 10px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  h3.section .num{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:20px;height:20px;
+    background:var(--navy);
+    color:#fff;
+    border-radius:50%;
+    font-size:12px;
+  }
+  table.info{
+    width:100%;
+    border-collapse:collapse;
+    font-size:14px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    overflow:hidden;
+  }
+  table.info th, table.info td{
+    padding:12px 14px;
+    border-bottom:1px solid var(--line);
+    text-align:left;
+    vertical-align:top;
+  }
+  table.info tr:last-child th, table.info tr:last-child td{border-bottom:none;}
+  table.info th{
+    width:130px;
+    background:#f7f8fa;
+    color:var(--navy-dark);
+    font-weight:700;
+    white-space:nowrap;
+  }
+  .flow{
+    display:flex;
+    align-items:stretch;
+    gap:10px;
+    margin-top:6px;
+    flex-wrap:wrap;
+  }
+  .flow-step{
+    flex:1;
+    min-width:150px;
+    background:#f7f8fa;
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:14px 12px;
+    text-align:center;
+  }
+  .flow-step .t{font-weight:700;color:var(--navy-dark);font-size:13.5px;margin-bottom:6px;}
+  .flow-step .d{font-size:12.5px;color:var(--muted);line-height:1.5;}
+  .flow-arrow{
+    align-self:center;
+    color:var(--navy);
+    font-size:18px;
+    padding:0 2px;
+  }
+  .cta{
+    display:block;
+    width:100%;
+    margin-top:30px;
+    background:var(--navy);
+    color:#fff;
+    text-align:center;
+    padding:15px;
+    border:none;
+    border-radius:8px;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+    text-decoration:none;
+  }
+  .cta:hover{background:var(--navy-dark);}
+  .footnote{
+    margin-top:18px;
+    font-size:12.5px;
+    color:var(--muted);
+    line-height:1.7;
+    text-align:center;
+  }
+  .foot{
+    text-align:center;
+    padding:20px;
+    font-size:12.5px;
+    color:var(--muted);
+  }
+
+  /* 분양금액 확인 탭 */
+  .lookup-form{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    margin-bottom:8px;
+  }
+  .lookup-form .full{grid-column:1 / -1;}
+  .field label{
+    display:block;
+    font-size:13px;
+    font-weight:700;
+    color:var(--navy-dark);
+    margin-bottom:6px;
+  }
+  .field select, .field input{
+    width:100%;
+    padding:11px 12px;
+    border:1px solid var(--line);
+    border-radius:7px;
+    font-size:14px;
+    background:#fff;
+  }
+  .field select:focus, .field input:focus{
+    outline:none;
+    border-color:var(--navy);
+  }
+  .lookup-btn{
+    margin-top:4px;
+    background:var(--navy);
+    color:#fff;
+    border:none;
+    padding:13px;
+    border-radius:8px;
+    font-weight:700;
+    font-size:14.5px;
+    cursor:pointer;
+    width:100%;
+  }
+  .lookup-btn:hover{background:var(--navy-dark);}
+  .result{
+    margin-top:22px;
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:18px 20px;
+    display:none;
+    font-size:14px;
+  }
+  .result.show{display:block;}
+  .result.error{border-color:#d98a8a;background:#fdf3f3;color:#a33;}
+  .result .amount{
+    font-size:24px;
+    font-weight:800;
+    color:var(--navy);
+    margin:4px 0 10px;
+  }
+  .result table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  .result table td{padding:6px 0;color:var(--text);}
+  .result table td:first-child{color:var(--muted);width:110px;}
+  .msg{
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+    margin-top:10px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="header">
+      <span class="badge">HOBAN</span>
+      <h1>구미 호반써밋 분양전환 안내</h1>
+    </div>
+
+    <div class="tabs" id="tabBar"></div>
+
+    <!-- 안내문 -->
+    <div class="content tab-panel" data-tab="notice">
+      <div class="eyebrow">분양전환 공고</div>
+      <h2>안내문</h2>
+
+      <p class="lead">
+        고객님의 가정에 건강과 행운이 함께 하시길 기원하오며, 입주자대표회의의 분양전환 요청에 따라
+        추가 분양전환 안내를 드립니다. 분양전환을 희망하는 세대는 아래 내용을 확인하시어
+        차질 없도록 준비하여 주시기 바랍니다.
+      </p>
+
+      <h3 class="section"><span class="num">1</span>계약자 지원</h3>
+      <table class="info">
+        <tr><th>대상</th><td>101 ~ 103동 임차인</td></tr>
+        <tr><th>지원금액</th><td>1,200만원</td></tr>
+        <tr><th>대상</th><td>104 ~ 118동 임차인</td></tr>
+        <tr><th>지원금액</th><td>1,500만원</td></tr>
+        <tr><th>비고</th><td>분양전환가격 확인은 상단 <b>[분양금액 확인]</b> 탭에서 동·호별로 조회하실 수 있습니다.</td></tr>
+      </table>
+
+      <h3 class="section"><span class="num">2</span>분양전환 대상자</h3>
+      <table class="info">
+        <tr><th>대상</th><td>분양전환 당시까지 거주한 무주택자인 임차인 (전입 必)</td></tr>
+      </table>
+
+      <h3 class="section"><span class="num">3</span>분양전환합의서 접수</h3>
+      <table class="info">
+        <tr><th>접수 기간</th><td>2026. 10. 12.(월) ~ 10. 23.(금) — 주말 제외 / 09:00 ~ 16:00 (점심시간 12:00~13:00 제외)</td></tr>
+        <tr><th>접수 장소</th><td>단지 내 상가 102호 (임대사무실) — GS편의점 옆</td></tr>
+        <tr><th>제출 서류</th><td>
+          ① 분양전환 합의서 (접수 장소 비치)<br>
+          ② 주민등록등본 (주민번호 전체표기, 2026년 10월 1일 이후 발급분)
+        </td></tr>
+        <tr><th>문의</th><td>☎ 054-604-7944</td></tr>
+        <tr><th>유의사항</th><td>제출하신 서류는 분양전환 목적 외 다른 용도로 사용하지 않습니다.</td></tr>
+      </table>
+
+      <h3 class="section"><span class="num">4</span>진행 일정</h3>
+      <div class="flow">
+        <div class="flow-step">
+          <div class="t">분양전환합의서 접수</div>
+          <div class="d">2026.10.12 ~ 10.23</div>
+        </div>
+        <div class="flow-arrow">➜</div>
+        <div class="flow-step">
+          <div class="t">계약체결</div>
+          <div class="d">2026.11.11 ~ 11.14 (예정)</div>
+        </div>
+        <div class="flow-arrow">➜</div>
+        <div class="flow-step">
+          <div class="t">잔금완납 및 소유권이전</div>
+          <div class="d">2027.3.12</div>
+        </div>
+      </div>
+      <div class="footnote">
+        ※ 계약체결 등 세부사항은 분양전환 합의서 접수자에 한하여 개별 안내드립니다. 단, 일부 일정은 변경될 수 있습니다.
+      </div>
+
+      <a href="#" class="cta" data-goto="price">분양금액 확인 바로가기 ›</a>
+
+      <div class="footnote" style="margin-top:24px;">
+        2026년 9월 28일<br>
+        티에스자산개발(주)
+      </div>
+    </div>
+
+    <!-- 분양금액 확인 -->
+    <div class="content tab-panel" data-tab="price" hidden>
+      <div class="eyebrow">분양전환가격 조회</div>
+      <h2>분양금액 확인</h2>
+      <p class="lead">
+        동·호를 선택하고 조회하기를 누르면 해당 세대의 분양전환금액을 확인하실 수 있습니다.
+        본 조회 결과는 참고용이며, 실제 계약금액은 접수처(단지 내 상가 102호 임대사무실)에서
+        최종 확인하시기 바랍니다.
+      </p>
+
+      <div class="lookup-form">
+        <div class="field">
+          <label>동</label>
+          <select id="dong">
+            <option value="">동 선택</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>호</label>
+          <input id="ho" type="text" inputmode="numeric" placeholder="예) 1201">
+        </div>
+        <div class="field full">
+          <label>계약자 성명 (본인확인용)</label>
+          <input id="name" type="text" placeholder="계약자 성명을 입력하세요">
+        </div>
+      </div>
+      <button class="lookup-btn" id="lookupBtn">조회하기</button>
+
+      <div class="result" id="result"></div>
+      <div class="msg" id="msg"></div>
+    </div>
+
+  </div>
+  <div class="foot">티에스자산개발㈜ · 임대사업소 문의 054-604-7943</div>
+</div>
+
+<script>
+/* =========================================================
+   탭 구성
+   - visible:true 인 탭만 화면에 노출됩니다.
+   - 방문예약 / 예약조회·취소는 이번 라운드에서 사용하지 않아
+     숨김 처리(visible:false) 해두었습니다. 추후 필요할 때
+     이 값만 true로 바꾸고, 해당 tab-panel(HTML)과 로직을
+     추가하면 됩니다. (기존 포항초곡 사이트와 동일한 구조)
+========================================================= */
+const TABS = [
+  { key: "notice", label: "안내문",          visible: true },
+  { key: "price",  label: "분양금액 확인",    visible: true },
+  { key: "visit",  label: "방문예약",         visible: false },
+  { key: "check",  label: "예약조회·취소",     visible: false },
+];
+
+const tabBar = document.getElementById("tabBar");
+TABS.filter(t => t.visible).forEach((t, i) => {
+  const btn = document.createElement("button");
+  btn.className = "tab-btn" + (i === 0 ? " active" : "");
+  btn.textContent = t.label;
+  btn.dataset.tab = t.key;
+  btn.addEventListener("click", () => showTab(t.key));
+  tabBar.appendChild(btn);
+});
+
+function showTab(key){
+  document.querySelectorAll(".tab-btn").forEach(b => b.classList.toggle("active", b.dataset.tab === key));
+  document.querySelectorAll(".tab-panel").forEach(p => p.hidden = p.dataset.tab !== key);
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+document.querySelectorAll("[data-goto]").forEach(el=>{
+  el.addEventListener("click", (e)=>{
+    e.preventDefault();
+    showTab(el.dataset.goto);
+  });
+});
+
+/* 동 목록: 101 ~ 118동. 실제 단지 동 구성과 다르면 이 배열만 수정하세요. */
+const DONG_LIST = Array.from({length: 18}, (_, i) => 101 + i); // 101~118
+const dongSelect = document.getElementById("dong");
+DONG_LIST.forEach(d=>{
+  const opt = document.createElement("option");
+  opt.value = d;
+  opt.textContent = d + "동";
+  dongSelect.appendChild(opt);
+});
+
+/* =========================================================
+   Google Apps Script 웹앱 배포 후 발급되는 URL을 아래에 넣으세요.
+   예) https://script.google.com/macros/s/AKfycb.../exec
+========================================================= */
+const GAS_API_URL = "PUT_YOUR_DEPLOYED_GAS_WEB_APP_URL_HERE";
+
+document.getElementById("lookupBtn").addEventListener("click", async ()=>{
+  const dong = dongSelect.value.trim();
+  const ho = document.getElementById("ho").value.trim();
+  const name = document.getElementById("name").value.trim();
+  const resultBox = document.getElementById("result");
+  const msg = document.getElementById("msg");
+  resultBox.className = "result";
+  resultBox.innerHTML = "";
+  msg.textContent = "";
+
+  if(!dong || !ho || !name){
+    msg.textContent = "동, 호, 계약자 성명을 모두 입력해주세요.";
+    return;
+  }
+  if(GAS_API_URL.indexOf("PUT_YOUR_DEPLOYED") === 0){
+    msg.textContent = "관리자 설정 필요: index.html의 GAS_API_URL을 배포된 Apps Script 웹앱 URL로 교체해주세요.";
+    return;
+  }
+
+  msg.textContent = "조회 중입니다...";
+  try{
+    const url = `${GAS_API_URL}?action=lookup&dong=${encodeURIComponent(dong)}&ho=${encodeURIComponent(ho)}&name=${encodeURIComponent(name)}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    msg.textContent = "";
+
+    if(!data.ok){
+      resultBox.className = "result show error";
+      resultBox.textContent = data.message || "일치하는 세대 정보를 찾을 수 없습니다. 입력하신 동·호·성명을 다시 확인해주세요.";
+      return;
+    }
+
+    resultBox.className = "result show";
+    resultBox.innerHTML = `
+      <div>${data.dong}동 ${data.ho}호 분양전환금액</div>
+      <div class="amount">${data.amount}</div>
+      <table>
+        <tr><td>계약자 지원금</td><td>${data.support || "-"}</td></tr>
+        <tr><td>비고</td><td>${data.note || "-"}</td></tr>
+      </table>
+    `;
+  }catch(err){
+    msg.textContent = "";
+    resultBox.className = "result show error";
+    resultBox.textContent = "조회 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.";
+  }
+});
+</script>
+</body>
+</html>
